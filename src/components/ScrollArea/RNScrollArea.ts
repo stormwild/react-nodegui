@@ -1,9 +1,11 @@
-import { QScrollArea, NodeWidget } from "@nodegui/nodegui";
+import { QScrollArea, NodeWidget, AlignmentFlag } from "@nodegui/nodegui";
 import { ViewProps, setViewProps } from "../View/RNView";
 import { RNWidget } from "../config";
 
 export interface ScrollAreaProps extends ViewProps {
   // TODO add props
+  widgetResizable?: boolean;
+  alignment?: AlignmentFlag;
 }
 
 const setScrollAreaProps = (
@@ -13,6 +15,12 @@ const setScrollAreaProps = (
 ) => {
   const setter: ScrollAreaProps = {
     //TODO add props
+    set widgetResizable(resizable: boolean) {
+      widget.setWidgetResizable(resizable);
+    },
+    set alignment(align: AlignmentFlag) {
+      widget.setProperty("alignment", align);
+    }
   };
   Object.assign(setter, newProps);
   setViewProps(widget, newProps, oldProps);
